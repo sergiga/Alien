@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_CompleteAssets\Scripts\GameManager.cs">
+    <Files>
+      <File FileName="Assets\_UI\Scripts\Manager.cs" Line="61" Column="20" />
+      <File FileName="Assets\_CompleteAssets\Scripts\Player\PlayerMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets\_CompleteAssets\Scripts\GameManager.cs" Line="50" Column="6" />
+      <File FileName="Assets\_CompleteAssets\Scripts\Bomb\BombGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets\_CompleteAssets\Scripts\Bomb\Explosion.cs" Line="39" Column="20" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -1,0 +1,286 @@
+fileFormatVersion: 2
+guid: cb96fe1f7065b0342807ded2d4043354
+timeCreated: 1429983160
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: MovimientoAlien_0
+    21300002: MovimientoAlien_1
+    21300004: MovimientoAlien_2
+    21300006: MovimientoAlien_3
+    21300008: MovimientoAlien_4
+    21300010: MovimientoAlien_5
+    21300012: MovimientoAlien_6
+    21300014: MovimientoAlien_7
+    21300016: MovimientoAlien_8
+    21300018: MovimientoAlien_9
+    21300020: MovimientoAlien_10
+    21300022: MovimientoAlien_11
+    21300024: MovimientoAlien_12
+    21300026: MovimientoAlien_13
+    21300028: MovimientoAlien_14
+    21300030: MovimientoAlien_15
+    21300032: MovimientoAlien_16
+    21300034: MovimientoAlien_17
+    21300036: MovimientoAlien_18
+    21300038: MovimientoAlien_19
+    21300040: MovimientoAlien_20
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: MovimientoAlien_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 38
+        width: 64
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 38
+        width: 65
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_2
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 38
+        width: 65
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_3
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 38
+        width: 64
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_4
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 38
+        width: 65
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_5
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 38
+        width: 65
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_6
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 38
+        width: 64
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_7
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 38
+        width: 65
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_8
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 38
+        width: 65
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_9
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 38
+        width: 64
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_10
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 38
+        width: 65
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_11
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 38
+        width: 65
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_12
+      rect:
+        serializedVersion: 2
+        x: 1030
+        y: 38
+        width: 65
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_13
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 38
+        width: 64
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_14
+      rect:
+        serializedVersion: 2
+        x: 1209
+        y: 38
+        width: 65
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_15
+      rect:
+        serializedVersion: 2
+        x: 1302
+        y: 38
+        width: 65
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_16
+      rect:
+        serializedVersion: 2
+        x: 1395
+        y: 38
+        width: 65
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_17
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 38
+        width: 77
+        height: 122
+      alignment: 9
+      pivot: {x: .419999987, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_18
+      rect:
+        serializedVersion: 2
+        x: 1590
+        y: 38
+        width: 94
+        height: 122
+      alignment: 9
+      pivot: {x: .349999994, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_19
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 37
+        width: 93
+        height: 123
+      alignment: 9
+      pivot: {x: .349999994, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MovimientoAlien_20
+      rect:
+        serializedVersion: 2
+        x: 1818
+        y: 37
+        width: 77
+        height: 123
+      alignment: 9
+      pivot: {x: .419999987, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
