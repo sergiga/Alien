@@ -46,10 +46,6 @@ public class GameManager : MonoBehaviour {
 		playerMovement = currentPlayer.GetComponent<PlayerMovement> ();
 	}
 
-	public void CharacterSelect() {
-	
-	}
-
 	public void GameOver() {
 		isDeath = true;
 		difficultyChange = 0;
