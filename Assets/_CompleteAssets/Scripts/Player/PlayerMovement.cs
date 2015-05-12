@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void OnEnable() {
-		playerAnim.SetTrigger ("StartRun");
+		playerAnim.SetTrigger ("move");
 	}
 
 	void Update() {
@@ -44,13 +44,15 @@ public class PlayerMovement : MonoBehaviour {
 		if (playerViewportPosition.x < 0.0f || playerViewportPosition.x > 1.0f) {
 			canChangeDirection = false;
 		}
-		if (playerViewportPosition.x < -0.15f) {
-			orientation = 0.8f;
-			transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-		} 
-		else if (playerViewportPosition.x > 1.15f) {
+		if (playerViewportPosition.x < -0.05f) {
 			orientation = -0.8f;
+			transform.position = new Vector3(3.4f, transform.position.y, transform.position.z);
 			transform.localScale = new Vector3(-0.8f, 0.8f, 0.8f);
+		} 
+		else if (playerViewportPosition.x > 1.05f) {
+			orientation = 0.8f;
+			transform.position = new Vector3(-3.4f, transform.position.y, transform.position.z);
+			transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
 		}
 	}
 
@@ -88,11 +90,5 @@ public class PlayerMovement : MonoBehaviour {
 		isDeath = true;
 		playerAnim.SetTrigger ("Death");
 		rb.AddForce (transform.up * explosionForce);
-	}
-
-	void OnBecameInvisible() {
-		transform.position = new Vector3 (transform.position.x * (-1)
-		                                 , transform.position.y
-		                                 , transform.position.z);
 	}
 }
