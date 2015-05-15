@@ -9,15 +9,12 @@ public class Explosion : MonoBehaviour {
 	public Sprite redBomb;
 	public AudioClip explosion;
 
-	GameObject alien;
 	Animator explode;
 	float explodeDist;
 	bool rebote = false;
 	bool dangerous = false;
-	bool redAnim = false;
 
 	void Awake() {
-		alien = GameObject.Find ("Player");
 		bombRb = GetComponent<Rigidbody2D> ();
 		explode = GetComponent<Animator> ();
 	}
@@ -40,7 +37,7 @@ public class Explosion : MonoBehaviour {
 	}
 
 	void OnTriggerStay2D(Collider2D coll) {
-		if (dangerous && coll.gameObject.name == "Player" && coll.gameObject.GetComponent<PlayerMovement>().isActiveAndEnabled) {
+		if (dangerous && coll.gameObject.name == "Player" && !GameManager.instance.gameOver) {
 			dangerous = false;
 			SoundManager.instance.RandomizeSfx(explosion);
 			GameManager.instance.GameOver();

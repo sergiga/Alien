@@ -4,92 +4,73 @@ using UnityEngine.UI;
 
 public class Manager : MonoBehaviour {
 
-	public Transform tapButton;
-	public Transform tapGameOver;
+	public Button StartButton;
+	public Button RankButton;
+	public Button ExitButton;
+	public Button PlayButton;
+	public Button MenuButton;
 
-	private Animator menuAnim;
-	private GameObject mainMenuContainer;
-	private GameObject gameOverContainer;
-	private GameObject tapToPlayContainer;
-	private GameObject player;
-	private BombGenerator bombGenerator;
-	bool gameOver = false;
+	private bool gameOverMenu;
 
-	void Awake() {
-		mainMenuContainer = GameObject.Find ("MainMenuContainer");
-		gameOverContainer = GameObject.Find ("GameOverMenuContainer");
-		tapToPlayContainer = GameObject.Find ("TapToPlayContainer");
-		menuAnim = GetComponent<Animator> ();
-		player = GameObject.Find ("Player");
-		bombGenerator = GameObject.Find ("Generator").GetComponent<BombGenerator> ();
+	void Update () {
 
-		gameOverContainer.SetActive (false);
-		tapToPlayContainer.SetActive(false);
-	}
+		if (GameManager.instance.gameOver && !gameOverMenu) {
 
-	void Update() {
-		if (!gameOver && player.transform.position.y > 6) {
-			gameOver = true;
-			menuAnim.SetTrigger("GameOver");
+			gameOverMenu = true;
+			TapToPlayMenu ("Enable");
+			Menu ("Enable");
 		}
 	}
 
-	public void TapToPlayButton() {
-		menuAnim.SetTrigger ("Start");
+	public void StartButtonPressed () {
+
+		MainMenu ("Disable");
+		TapToPlayMenu ("Enable");
 	}
 
-	public void StartGame() {
-		player.GetComponent<PlayerMovement> ().enabled = true;
-		bombGenerator.enabled = true;
-		mainMenuContainer.SetActive (false);
-		tapToPlayContainer.SetActive (false);
-		gameOverContainer.SetActive (false);
-		tapButton.GetComponent<Button> ().interactable = true;
+	public void RankingButtonPressed () {
+
+
 	}
 
-	public void InitialMenuConfig() {
-		mainMenuContainer.SetActive (true);
-		gameOverContainer.SetActive (false);
-		tapToPlayContainer.SetActive (false);
+	public void MenuButtonPressed () {
+		
+		Menu ("Disable");
+		TapToPlayMenu ("Disable");
+		MainMenu ("Enable");
 	}
 
-	public void StartGameButton() {
-		menuAnim.SetTrigger ("GameScene");
+	public void PlayButtonPressed () {
+
+		TapToPlayMenu ("Disable");
+		GameManager.instance.StartGame ();
+		gameOverMenu = false;
 	}
 
-	public void DisableMenuButton() {
-		tapGameOver.GetComponent<Button> ().interactable = false;
+	public void MenuPressed () {
+	
+
 	}
 
-	public void DisableTapButton() {
-		tapButton.GetComponent<Button> ().interactable = false;
-		tapGameOver.GetComponent<Button> ().interactable = false;
+	public void MainMenu (string state) {
+
+		StartButton.animator.SetTrigger (state);
+		RankButton.animator.SetTrigger (state);
+		ExitButton.animator.SetTrigger (state);
 	}
 
-	public void EnableTapMenu() {
-		mainMenuContainer.SetActive (false);
-		gameOverContainer.SetActive (false);
-		tapToPlayContainer.SetActive (true);
+	public void TapToPlayMenu (string state) {
+
+		PlayButton.animator.SetTrigger (state);
 	}
 
-	public void InitialGameOverConfig() {
-		gameOver = false;
-		GameManager.instance.InitGame ();
-		player = GameObject.Find ("Player");
-		tapGameOver.GetComponent<Button> ().interactable = true;
-		gameOverContainer.SetActive (true);
-	}
-
-	public void Restart() {
-		menuAnim.SetTrigger ("Restart");
-	}
-
-	public void MenuButton() {
-		menuAnim.SetTrigger ("Menu");
-		mainMenuContainer.SetActive (true);
+	public void Menu (string state) {
+		
+		MenuButton.animator.SetTrigger (state);
 	}
 
 	public void ExitGame() {
+
 		Application.Quit();
 	}
 }

@@ -3,28 +3,27 @@ using System.Collections;
 
 public class BombGenerator : MonoBehaviour {
 
-	public float bombRate;
 	public int minHoles = 3;
 	public GameObject bombPrefab;
 	public Transform[] spawnPoints;
 
 	int[] picked_2;
 
-	void OnEnable () {
+	void Start () {
 
-		bombRate = 0.8f;
 		picked_2 = new int[7]{0,0,0,0,0,0,0};
-		StartCoroutine (OnEnableCoroutine ());
 	}
 
-	IEnumerator OnEnableCoroutine() {
+	public IEnumerator StartGenerator() {
 
-		while (!GameManager.instance.isDeath) {
+		while (!GameManager.instance.gameOver) {
+
 			CreateBomb();
-			yield  return new WaitForSeconds(bombRate);
+			yield  return new WaitForSeconds(GameManager.instance.bombRate);
 		}
 	}
 	void CreateBomb () {
+
 		int spawnPointIndex;
 
 		spawnPointIndex = Random.Range (0, spawnPoints.Length);

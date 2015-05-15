@@ -1,64 +1,91 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
 	public static GameManager instance = null;
-	public Text finalScoreText;
-	public Vector3 initialPosition;
-	public GameObject playerPrefab;
-	public bool isDeath;
 
-	PlayerMovement playerMovement;
-	BombGenerator bombGenerator;
-	int score = 0;
-	int difficultyChange = 0;
-	float difficulty = 0.8f;
+	public GameObject[] characterPrefab;
+	public Vector3 spawnPoint;
+	public Vector3 restartPoint;
 
-	void Awake() {
+	[HideInInspector] public float bombRate = 0f;
+	[HideInInspector] public bool changeCharacter = false;
+	[HideInInspector] public bool gameOver = true;
+	[HideInInspector] public bool move = false;
+
+	private GameObject player;
+	private BombGenerator bombGenerator;
+	private int difficultyCount = 0;
+	private int characterIndex = 0;
+	private int score = 0;
+
+	void Start() {
+
 		if (instance == null) {
 			instance = this;
 		} else if (instance != this) {
 			Destroy (gameObject);
 		}
-		finalScoreText = GameObject.Find ("FinalScoreText").GetComponent<Text> ();
-		bombGenerator = GameObject.Find("Generator").GetComponent<BombGenerator> ();
-		playerMovement = GameObject.Find ("Player").GetComponent<PlayerMovement> ();
-	}
 
-	void Update() {
-		if (difficultyChange == 10 && difficulty > 0.5f) {
-			difficultyChange = 0;
-			difficulty -= 0.05f;
-			bombGenerator.bombRate = difficulty;
-		}
-		if (score > 100 && difficultyChange == 100 && difficulty > 0.4f) {
-			difficulty -= 0.005f;
-		}
-	}
-
-	public void InitGame() {
-		GameObject currentPlayer = Instantiate (playerPrefab, initialPosition, Quaternion.identity) as GameObject;
-		currentPlayer.name = "Player";
-		score = 0;
-		isDeath = false;
-		playerMovement = currentPlayer.GetComponent<PlayerMovement> ();
-	}
-
-	public void GameOver() {
-		isDeath = true;
-		difficultyChange = 0;
-		difficulty = 0.8f;
-		playerMovement.playerDeath ();
-		bombGenerator.enabled = false;
-		finalScoreText.text = score.ToString ();
+		spawnPoint = Camera.main.ViewportToWorldPoint (spawnPoint);
+		spawnPoint = new Vector3 (spawnPoint.x, -1.671f, -1.25f);
+		restartPoint = new Vector3 (0f, -1.671f, -1.25f);
+		bombGenerator = GameObject.Find ("Generator").GetComponent<BombGenerator> ();
 	}
 
 	public void DodgeBomb() {
-		if (!isDeath) {
+
+		if (!gameOver) {
 			score++;
-			difficultyChange++;
+			difficultyCount++;
+			UpdateDifficulty();
 		}
+	}
+	
+	public void StartGame() {
+
+		bombRate = 0.8f;
+		gameOver = false;
+		StartCoroutine (bombGenerator.StartGenerator ());
+		move = true;
+	}
+
+	public void GameOver() {
+
+		GameObject player;
+
+		gameOver = true;
+		move = false;
+		player = Instantiate (characterPrefab [characterIndex], spawnPoint, Quaternion.identity) as GameObject;
+		player.name = "Player";	
+		changeCharacter = true;
+	}
+
+	void UpdateDifficulty() {
+
+		if (difficultyCount == 10 && bombRate > 0.5f) {
+			difficultyCount = 0;
+			bombRate -= 0.05f;
+		}
+		if (score > 100 && difficultyCount == 100 && bombRate > 0.4f) {
+			bombRate -= 0.005f;
+		}
+	}
+
+	public void ChangeCharacter(int direction) {
+		
+		characterIndex += direction;
+		if (characterIndex < 0) {
+			characterIndex = characterPrefab.Length - 1;
+		} 
+		else if (characterIndex == characterPrefab.Length) {
+			characterIndex = 0;
+		}
+		GameObject currentPlayer = GameObject.Find("Player");
+		GameObject newPlayer = Instantiate(characterPrefab[characterIndex], spawnPoint, Quaternion.identity) as GameObject;
+		changeCharacter = true;
+		currentPlayer.name = "Last Player";
+		newPlayer.name = "Player";
 	}
 }
