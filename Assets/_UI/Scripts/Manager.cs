@@ -34,7 +34,7 @@ public class Manager : MonoBehaviour {
 	}
 
 	public void MenuButtonPressed () {
-		
+
 		Menu ("Disable");
 		TapToPlayMenu ("Disable");
 		MainMenu ("Enable");
@@ -42,15 +42,13 @@ public class Manager : MonoBehaviour {
 
 	public void PlayButtonPressed () {
 
+		if(MenuButton.transform.position.x > 0)
+			Menu ("Disable");
 		TapToPlayMenu ("Disable");
 		GameManager.instance.StartGame ();
 		gameOverMenu = false;
 	}
 
-	public void MenuPressed () {
-	
-
-	}
 
 	public void MainMenu (string state) {
 

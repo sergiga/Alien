@@ -52,10 +52,8 @@
      <Compile Include="Assets\_CompleteAssets\Scripts\Loader.cs" />
      <Compile Include="Assets\_CompleteAssets\Scripts\Player\Player.cs" />
      <Compile Include="Assets\_CompleteAssets\Scripts\Player\PlayerMove.cs" />
-     <Compile Include="Assets\_CompleteAssets\Scripts\Player\SparkleMovement.cs" />
      <Compile Include="Assets\_CompleteAssets\Scripts\SoundManager.cs" />
      <Compile Include="Assets\_UI\Scripts\Manager.cs" />
-     <Compile Include="Assets\_UI\Scripts\UIManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

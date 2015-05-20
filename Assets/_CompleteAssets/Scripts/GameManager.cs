@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
 	[HideInInspector] public float bombRate = 0f;
 	[HideInInspector] public bool changeCharacter = false;
 	[HideInInspector] public bool gameOver = true;
+	[HideInInspector] public bool respawn = true;
 	[HideInInspector] public bool move = false;
 
 	private GameObject player;
@@ -34,15 +35,6 @@ public class GameManager : MonoBehaviour {
 		bombGenerator = GameObject.Find ("Generator").GetComponent<BombGenerator> ();
 	}
 
-	public void DodgeBomb() {
-
-		if (!gameOver) {
-			score++;
-			difficultyCount++;
-			UpdateDifficulty();
-		}
-	}
-	
 	public void StartGame() {
 
 		bombRate = 0.8f;
@@ -56,10 +48,21 @@ public class GameManager : MonoBehaviour {
 		GameObject player;
 
 		gameOver = true;
-		move = false;
-		player = Instantiate (characterPrefab [characterIndex], spawnPoint, Quaternion.identity) as GameObject;
-		player.name = "Player";	
-		changeCharacter = true;
+		move = false;	
+	}
+	public void RespawnPlayer () {
+
+		player = Instantiate (characterPrefab [characterIndex], restartPoint, Quaternion.identity) as GameObject;
+		player.name = "Player";
+	}
+
+	public void DodgeBomb() {
+		
+		if (!gameOver) {
+			score++;
+			difficultyCount++;
+			UpdateDifficulty();
+		}
 	}
 
 	void UpdateDifficulty() {

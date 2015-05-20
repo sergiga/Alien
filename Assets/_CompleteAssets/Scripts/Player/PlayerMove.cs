@@ -38,6 +38,7 @@ public abstract class PlayerMove : MonoBehaviour {
 			transform.position += explosionDirection * Time.deltaTime;
 			yield return new WaitForSeconds(Time.deltaTime);
 		} 
+		GameManager.instance.RespawnPlayer ();
 		transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
 		transform.position = new Vector3 (transform.position.x, 6.5f, 1f);
 		while (transform.position.y > endPosition) {

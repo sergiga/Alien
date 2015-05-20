@@ -21,19 +21,11 @@ public class Explosion : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll) {
 
-		if (coll.gameObject.name == "SueloFondo") {
-			if(!rebote) {
-				rebote = true;
-				bombRb.AddForce(transform.up * jumpForce);
-			}
-			else if(rebote) {
-				dangerous = true;
-				transform.position = new Vector3(transform.position.x
-				                                 ,transform.position.y
-				                                 ,transform.position.z);
-				explode.SetTrigger("explode");
-			}
-		}
+		dangerous = true;
+		transform.position = new Vector3(transform.position.x
+		                                 ,transform.position.y
+		                                 ,transform.position.z);
+		explode.SetTrigger("explode");
 	}
 
 	void OnTriggerStay2D(Collider2D coll) {
