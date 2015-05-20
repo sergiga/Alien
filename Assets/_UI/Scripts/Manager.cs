@@ -9,6 +9,8 @@ public class Manager : MonoBehaviour {
 	public Button ExitButton;
 	public Button PlayButton;
 	public Button MenuButton;
+	public Button NextCharacter;
+	public Button PreviousCharacter;
 
 	private bool gameOverMenu;
 
@@ -25,6 +27,7 @@ public class Manager : MonoBehaviour {
 	public void StartButtonPressed () {
 
 		MainMenu ("Disable");
+		ChangeCharacter ("Disable");
 		TapToPlayMenu ("Enable");
 	}
 
@@ -37,6 +40,7 @@ public class Manager : MonoBehaviour {
 
 		Menu ("Disable");
 		TapToPlayMenu ("Disable");
+		ChangeCharacter ("Enable");
 		MainMenu ("Enable");
 	}
 
@@ -49,6 +53,15 @@ public class Manager : MonoBehaviour {
 		gameOverMenu = false;
 	}
 
+	public void NextCharacterPressed() {
+
+		GameManager.instance.ChangeCharacter (1);
+	}
+
+	public void PreviousCharacterPressed() {
+		
+		GameManager.instance.ChangeCharacter (-1);
+	}
 
 	public void MainMenu (string state) {
 
@@ -65,6 +78,12 @@ public class Manager : MonoBehaviour {
 	public void Menu (string state) {
 		
 		MenuButton.animator.SetTrigger (state);
+	}
+
+	public void ChangeCharacter (string state) {
+
+		NextCharacter.animator.SetTrigger (state);
+		PreviousCharacter.animator.SetTrigger (state);
 	}
 
 	public void ExitGame() {
