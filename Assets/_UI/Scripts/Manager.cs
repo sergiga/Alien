@@ -26,9 +26,11 @@ public class Manager : MonoBehaviour {
 
 	public void StartButtonPressed () {
 
-		MainMenu ("Disable");
-		ChangeCharacter ("Disable");
-		TapToPlayMenu ("Enable");
+		if (!GameManager.instance.changeCharacter) {
+			MainMenu ("Disable");
+			ChangeCharacter ("Disable");
+			TapToPlayMenu ("Enable");
+		}
 	}
 
 	public void RankingButtonPressed () {
@@ -55,12 +57,14 @@ public class Manager : MonoBehaviour {
 
 	public void NextCharacterPressed() {
 
-		GameManager.instance.ChangeCharacter (1);
+		if(!GameManager.instance.changeCharacter)
+			GameManager.instance.ChangeCharacter (1);
 	}
 
 	public void PreviousCharacterPressed() {
-		
-		GameManager.instance.ChangeCharacter (-1);
+
+		if(!GameManager.instance.changeCharacter)
+			GameManager.instance.ChangeCharacter (-1);
 	}
 
 	public void MainMenu (string state) {

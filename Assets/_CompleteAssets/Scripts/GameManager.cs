@@ -6,11 +6,13 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance = null;
 
 	public GameObject[] characterPrefab;
-	public Vector3 spawnPoint;
+	public Vector3 leftSpawnPoint;
+	public Vector3 rightSpawnPoint;
 	public Vector3 restartPoint;
 
 	[HideInInspector] public float bombRate = 0f;
 	[HideInInspector] public bool changeCharacter = false;
+	[HideInInspector] public int changeDirection = 1;
 	[HideInInspector] public bool gameOver = true;
 	[HideInInspector] public bool respawn = true;
 	[HideInInspector] public bool move = false;
@@ -29,9 +31,7 @@ public class GameManager : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		spawnPoint = Camera.main.ViewportToWorldPoint (spawnPoint);
-		spawnPoint = new Vector3 (spawnPoint.x, -1.671f, -1.25f);
-		restartPoint = new Vector3 (0f, -1.671f, -1.25f);
+		restartPoint = new Vector3 (0f, -1.688f, 0f);
 		bombGenerator = GameObject.Find ("Generator").GetComponent<BombGenerator> ();
 	}
 
@@ -44,8 +44,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void GameOver() {
-
-		GameObject player;
 
 		gameOver = true;
 		move = false;	
@@ -77,8 +75,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void ChangeCharacter(int direction) {
-		
+
 		characterIndex += direction;
+		changeCharacter = true;
 		if (characterIndex < 0) {
 			characterIndex = characterPrefab.Length - 1;
 		} 
@@ -86,9 +85,9 @@ public class GameManager : MonoBehaviour {
 			characterIndex = 0;
 		}
 		GameObject currentPlayer = GameObject.Find("Player");
-		GameObject newPlayer = Instantiate(characterPrefab[characterIndex], spawnPoint, Quaternion.identity) as GameObject;
-		changeCharacter = true;
-		currentPlayer.name = "Last Player";
+		Destroy(currentPlayer);
+		GameObject newPlayer = Instantiate(characterPrefab[characterIndex], restartPoint, Quaternion.identity) as GameObject;
 		newPlayer.name = "Player";
+		changeCharacter = false;
 	}
 }

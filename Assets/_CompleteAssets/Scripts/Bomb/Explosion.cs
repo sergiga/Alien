@@ -11,7 +11,6 @@ public class Explosion : MonoBehaviour {
 
 	Animator explode;
 	float explodeDist;
-	bool rebote = false;
 	bool dangerous = false;
 
 	void Awake() {
