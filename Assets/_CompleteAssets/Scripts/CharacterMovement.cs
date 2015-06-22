@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GreenAlienMove : MonoBehaviour {
+public class CharacterMovement : MonoBehaviour {
 	
 	public float moveSpeed = 6f;
 	public float dragTime;

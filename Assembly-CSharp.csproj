@@ -49,8 +49,8 @@
      <Compile Include="Assets\_CompleteAssets\Scripts\Bomb\Bomb.cs" />
      <Compile Include="Assets\_CompleteAssets\Scripts\Bomb\BombGenerator.cs" />
      <Compile Include="Assets\_CompleteAssets\Scripts\Bomb\Explosion.cs" />
+     <Compile Include="Assets\_CompleteAssets\Scripts\CharacterMovement.cs" />
      <Compile Include="Assets\_CompleteAssets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\_CompleteAssets\Scripts\Green Alien\GreenAlienMove.cs" />
      <Compile Include="Assets\_CompleteAssets\Scripts\Loader.cs" />
      <Compile Include="Assets\_CompleteAssets\Scripts\OldPlayerMovement\GreenPlayer\GreenPlayerAnim.cs" />
      <Compile Include="Assets\_CompleteAssets\Scripts\OldPlayerMovement\Player.cs" />
