@@ -61,6 +61,8 @@
      <Compile Include="Assets\_CompleteAssets\Scripts\OldPlayerMovement\YellowPlayer\YellowPlayerController.cs" />
      <Compile Include="Assets\_CompleteAssets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\_CompleteAssets\Scripts\SoundManager.cs" />
+     <Compile Include="Assets\_UI\Scripts\Achievement.cs" />
+     <Compile Include="Assets\_UI\Scripts\AchievementManager.cs" />
      <Compile Include="Assets\_UI\Scripts\Manager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

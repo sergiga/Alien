@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
 
 	private GameObject player;
 	private BombGenerator bombGenerator;
+	private AchievementManager achManager;
 	private int difficultyCount = 0;
 	private int characterIndex = 0;
 	private int score = 0;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour {
 
 		restartPoint = new Vector3 (0f, -1.688f, 0f);
 		bombGenerator = GameObject.Find ("Generator").GetComponent<BombGenerator> ();
+		achManager = GameObject.Find ("AchievementManager").GetComponent<AchievementManager> ();
 	}
 
 	public void StartGame() {
@@ -46,7 +48,8 @@ public class GameManager : MonoBehaviour {
 	public void GameOver() {
 
 		gameOver = true;
-		move = false;	
+		move = false;
+		achManager.CheckForAchievements (score);
 	}
 	public void RespawnPlayer () {
 
