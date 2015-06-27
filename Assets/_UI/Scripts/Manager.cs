@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Manager : MonoBehaviour {
-
+	
 	public Button StartButton;
 	public Button RankButton;
 	public Button ExitButton;
@@ -11,8 +11,9 @@ public class Manager : MonoBehaviour {
 	public Button MenuButton;
 	public Button NextCharacter;
 	public Button PreviousCharacter;
-
+	
 	private bool gameOverMenu;
+	private bool menuButtonEnabled = false;
 
 	void Update () {
 
@@ -29,6 +30,7 @@ public class Manager : MonoBehaviour {
 		if (!GameManager.instance.changeCharacter) {
 			MainMenu ("Disable");
 			ChangeCharacter ("Disable");
+			AchievementCanvasFade();
 			TapToPlayMenu ("Enable");
 		}
 	}
@@ -48,8 +50,9 @@ public class Manager : MonoBehaviour {
 
 	public void PlayButtonPressed () {
 
-		if(MenuButton.transform.position.x > 0)
+		if (menuButtonEnabled) {
 			Menu ("Disable");
+		}
 		TapToPlayMenu ("Disable");
 		GameManager.instance.StartGame ();
 		gameOverMenu = false;
@@ -82,12 +85,18 @@ public class Manager : MonoBehaviour {
 	public void Menu (string state) {
 		
 		MenuButton.animator.SetTrigger (state);
+		menuButtonEnabled = state.Contains ("Enable") ? true : false;
 	}
 
 	public void ChangeCharacter (string state) {
 
 		NextCharacter.animator.SetTrigger (state);
 		PreviousCharacter.animator.SetTrigger (state);
+	}
+
+	public void AchievementCanvasFade() {
+
+		StartCoroutine(AchievementManager.instance.ShowAchievementMenu(true));
 	}
 
 	public void ExitGame() {

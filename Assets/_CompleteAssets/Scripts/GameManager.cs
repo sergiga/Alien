@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
 	public static GameManager instance = null;
 
 	public GameObject[] characterPrefab;
-	public Vector3 leftSpawnPoint;
-	public Vector3 rightSpawnPoint;
 	public Vector3 restartPoint;
 
 	[HideInInspector] public float bombRate = 0f;
@@ -18,11 +18,17 @@ public class GameManager : MonoBehaviour {
 	[HideInInspector] public bool move = false;
 
 	private GameObject player;
+	private GameObject scoreText;
+
 	private BombGenerator bombGenerator;
-	private AchievementManager achManager;
+
 	private int difficultyCount = 0;
 	private int characterIndex = 0;
+
 	private int score = 0;
+	private int gamesPlayed = 0;
+
+	public List<GameObject> unlockedCharacters = new List<GameObject>();
 
 	void Start() {
 
@@ -34,13 +40,18 @@ public class GameManager : MonoBehaviour {
 
 		restartPoint = new Vector3 (0f, -1.688f, 0f);
 		bombGenerator = GameObject.Find ("Generator").GetComponent<BombGenerator> ();
-		achManager = GameObject.Find ("AchievementManager").GetComponent<AchievementManager> ();
+		scoreText = GameObject.Find ("Score Text");
+		scoreText.SetActive (false);
+		gameOver = false;
+		gamesPlayed = PlayerPrefs.GetInt ("GamesPlayed");
+		CheckUnlockedCharacters ();
 	}
 
 	public void StartGame() {
 
 		bombRate = 0.8f;
 		gameOver = false;
+		scoreText.SetActive (true);
 		StartCoroutine (bombGenerator.StartGenerator ());
 		move = true;
 	}
@@ -49,11 +60,17 @@ public class GameManager : MonoBehaviour {
 
 		gameOver = true;
 		move = false;
-		achManager.CheckForAchievements (score);
+		scoreText.GetComponent<Text> ().text = "0";
+		scoreText.SetActive (false);
+		gamesPlayed++;
+		PlayerPrefs.SetInt ("GamesPlayed", gamesPlayed);	
+		AchievementManager.instance.CheckForAchievements (score, gamesPlayed);
+		CheckUnlockedCharacters ();
+		score = 0;
 	}
 	public void RespawnPlayer () {
 
-		player = Instantiate (characterPrefab [characterIndex], restartPoint, Quaternion.identity) as GameObject;
+		player = Instantiate (unlockedCharacters [characterIndex], restartPoint, Quaternion.identity) as GameObject;
 		player.name = "Player";
 	}
 
@@ -61,13 +78,31 @@ public class GameManager : MonoBehaviour {
 		
 		if (!gameOver) {
 			score++;
+			scoreText.GetComponent<Text> ().text = score.ToString();
 			difficultyCount++;
 			UpdateDifficulty();
 		}
 	}
+	
+	public void ChangeCharacter(int direction) {
+		
+		characterIndex += direction;
+		changeCharacter = true;
+		if (characterIndex < 0) {
+			characterIndex = unlockedCharacters.Count - 1;
+		} 
+		else if (characterIndex == unlockedCharacters.Count) {
+			characterIndex = 0;
+		}
+		GameObject currentPlayer = GameObject.Find("Player");
+		Destroy(currentPlayer);
+		GameObject newPlayer = Instantiate(unlockedCharacters[characterIndex], restartPoint, Quaternion.identity) as GameObject;
+		newPlayer.name = "Player";
+		changeCharacter = false;
+	}
 
-	void UpdateDifficulty() {
-
+	private void UpdateDifficulty() {
+		
 		if (difficultyCount == 10 && bombRate > 0.5f) {
 			difficultyCount = 0;
 			bombRate -= 0.05f;
@@ -77,20 +112,12 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void ChangeCharacter(int direction) {
+	private void CheckUnlockedCharacters () {
 
-		characterIndex += direction;
-		changeCharacter = true;
-		if (characterIndex < 0) {
-			characterIndex = characterPrefab.Length - 1;
-		} 
-		else if (characterIndex == characterPrefab.Length) {
-			characterIndex = 0;
+		unlockedCharacters.Clear ();
+		unlockedCharacters.Add (characterPrefab [0]);
+		foreach (Achievement achievement in AchievementManager.instance.rewardAchievements) {
+			unlockedCharacters.Add(characterPrefab[achievement.Reward]);
 		}
-		GameObject currentPlayer = GameObject.Find("Player");
-		Destroy(currentPlayer);
-		GameObject newPlayer = Instantiate(characterPrefab[characterIndex], restartPoint, Quaternion.identity) as GameObject;
-		newPlayer.name = "Player";
-		changeCharacter = false;
 	}
 }
