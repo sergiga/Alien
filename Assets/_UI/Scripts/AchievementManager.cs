@@ -35,20 +35,42 @@ public class AchievementManager : MonoBehaviour {
 
 		PlayerPrefs.DeleteAll ();
 
+		// Testing achievements
 		CreateAchievement ("General", "Easy", "Dodge 1 bomb in a single game.", 0, 10, 0, false);
 		CreateAchievement ("General", "Normal", "Dodge 5 bombs in a single game.", 0, 10, 0, false);
 		CreateAchievement ("General", "Hard", "Dodge 10 bombs in a single game.", 0, 10, 0, false);
 		CreateAchievement ("General", "Master of bombs", "Earn all the dodge bomb achievements.", 0, 10, 1, true, new string[] {"Easy","Normal","Hard"});
-		CreateAchievement ("General", "Play1", "Play one game", 0, 10, 2, true);
-		/*foreach (GameObject achievementList in GameObject.FindGameObjectsWithTag("AchievementList")) {
+		CreateAchievement ("General", "PlayOne", "Play one game", 0, 10, 2, true);
+		CreateAchievement ("General", "PlayBlue", "Play one game", 0, 10, 3, true);
+		CreateAchievement ("General", "UnlockAll", "Unlock all the characters", 0, 10, 4, true, new string[] {"Master of bombs","PlayOne","PlayBlue"});
 
-			achievementList.SetActive(false);
-		}*/
+		/*
+		// True Achievements
+
+		// Dogde bombs in a single game
+		CreateAchievement ("General", "Easy", "Dodge 10 bomb in a single game.", 0, 10, 0, false);
+		CreateAchievement ("General", "Normal", "Dodge 50 bombs in a single game.", 0, 10, 0, false);
+		CreateAchievement ("General", "Hard", "Dodge 100 bombs in a single game.", 0, 10, 0, false);
+		CreateAchievement ("General", "Insane", "Dodge 150 bombs in a single game.", 0, 10, 1, true);
+		// Dodge Bombs
+		CreateAchievement ("General", "Easy One", "Dodge 100 bombs.", 0, 10, 0, false);
+		CreateAchievement ("General", "Normal One", "Dodge 200 bombs.", 0, 10, 0, false);
+		CreateAchievement ("General", "Hard One", "Dodge 500 bombs.", 0, 10, 2, true);
+		// Games played
+		CreateAchievement ("General", "Easy Two", "Play 10 games.", 0, 10, 0, false);
+		CreateAchievement ("General", "Normal Two", "Play 50 games.", 0, 10, 0, false);
+		CreateAchievement ("General", "Hard Two", "Play 100 games.", 0, 10, 0, false);
+		CreateAchievement ("General", "Insane Two", "Play 200 games.", 0, 10, 3, true);
+		// Unlock all above
+		CreateAchievement ("General", "Unlock All", "Unlock all the characters", 0, 10, 4, true, new string[] {"Insane","HardOne","InsaneTwo"});
+
+		*/
 		achievementMenu.SetActive (false);
 	}
 
 	public void CheckForAchievements(int score, int gamesPlayed) {
-	
+
+		// Testing achievements
 		if (score >= 1) {
 			EarnAchievement("Easy");
 		}
@@ -59,7 +81,8 @@ public class AchievementManager : MonoBehaviour {
 			EarnAchievement("Hard");
 		}
 		if (gamesPlayed >= 1) {
-			EarnAchievement("Play1");
+			EarnAchievement("PlayOne");
+			EarnAchievement("PlayBlue");
 		}
 	}
 
