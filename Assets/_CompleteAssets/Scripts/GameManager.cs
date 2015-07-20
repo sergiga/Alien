@@ -10,12 +10,19 @@ public class GameManager : MonoBehaviour {
 	public GameObject[] characterPrefab;
 	public Vector3 restartPoint;
 
-	[HideInInspector] public float bombRate = 0f;
+	public float startingBombRate = 0.8f;
+	public float maxDifficulty = 0.4f;
+	public float startingBombGravity = -4f;
+	public float maxBombGravity = -15f;
+
+	[HideInInspector] public float bombRate;
+	[HideInInspector] public float bombGravity;
 	[HideInInspector] public bool changeCharacter = false;
 	[HideInInspector] public int changeDirection = 1;
 	[HideInInspector] public bool gameOver = true;
 	[HideInInspector] public bool respawn = true;
 	[HideInInspector] public bool move = false;
+	[HideInInspector] public GameObject finalScore;
 
 	private GameObject player;
 	private GameObject scoreText;
@@ -26,6 +33,8 @@ public class GameManager : MonoBehaviour {
 	private int characterIndex = 0;
 
 	private int score = 0;
+	private int bestScore;
+	private int totalScore = 0;
 	private int gamesPlayed = 0;
 
 	public List<GameObject> unlockedCharacters = new List<GameObject>();
@@ -42,29 +51,56 @@ public class GameManager : MonoBehaviour {
 		bombGenerator = GameObject.Find ("Generator").GetComponent<BombGenerator> ();
 		scoreText = GameObject.Find ("Score Text");
 		scoreText.SetActive (false);
+		finalScore = GameObject.Find ("Final Score");
+		finalScore.SetActive (false);
 		gameOver = false;
 		gamesPlayed = PlayerPrefs.GetInt ("GamesPlayed");
+		totalScore = PlayerPrefs.GetInt ("TotalScore");
+		bestScore = PlayerPrefs.GetInt ("BestScore");
 		CheckUnlockedCharacters ();
+	}
+
+	void Update() {
+
+		if (!move) return;
+
+		UpdateDifficulty ();
 	}
 
 	public void StartGame() {
 
-		bombRate = 0.8f;
+		bombRate = startingBombRate;
+		bombGravity = startingBombGravity;
 		gameOver = false;
 		scoreText.SetActive (true);
+		finalScore.SetActive (false);
 		StartCoroutine (bombGenerator.StartGenerator ());
 		move = true;
 	}
 
 	public void GameOver() {
 
+		Text finalScoreText = finalScore.GetComponent<Text> ();
 		gameOver = true;
 		move = false;
 		scoreText.GetComponent<Text> ().text = "0";
 		scoreText.SetActive (false);
 		gamesPlayed++;
+		totalScore += score;
+		finalScoreText.text = "Score: " + score + "\n";
+		if (score > bestScore) {
+			PlayerPrefs.SetInt("BestScore", score);
+			bestScore = score;
+			finalScoreText.text += "New best: " + score;
+		}
+		else {
+			finalScoreText.text += "Best: " + bestScore;
+		}
+		finalScore.SetActive (true);
 		PlayerPrefs.SetInt ("GamesPlayed", gamesPlayed);	
-		AchievementManager.instance.CheckForAchievements (score, gamesPlayed);
+		PlayerPrefs.SetInt ("TotalScore", totalScore);
+		AchievementManager.instance.CheckForAchievements (score, gamesPlayed, totalScore);
+
 		CheckUnlockedCharacters ();
 		score = 0;
 	}
@@ -80,7 +116,7 @@ public class GameManager : MonoBehaviour {
 			score++;
 			scoreText.GetComponent<Text> ().text = score.ToString();
 			difficultyCount++;
-			UpdateDifficulty();
+			//UpdateDifficulty();
 		}
 	}
 	
@@ -101,7 +137,17 @@ public class GameManager : MonoBehaviour {
 		changeCharacter = false;
 	}
 
-	private void UpdateDifficulty() {
+	private void UpdateDifficulty () {
+
+		if (bombRate > maxDifficulty) {
+			bombRate -= 0.05f * Time.deltaTime/10;
+		}
+		if (bombGravity > maxBombGravity) {
+			bombGravity -= Time.deltaTime/10;
+		}
+	}
+
+	/* private void UpdateDifficulty() {
 		
 		if (difficultyCount == 10 && bombRate > 0.5f) {
 			difficultyCount = 0;
@@ -110,7 +156,7 @@ public class GameManager : MonoBehaviour {
 		if (score > 100 && difficultyCount == 100 && bombRate > 0.4f) {
 			bombRate -= 0.005f;
 		}
-	}
+	} */
 
 	private void CheckUnlockedCharacters () {
 

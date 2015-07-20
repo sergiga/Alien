@@ -8,11 +8,11 @@ public class Bomb : MonoBehaviour {
 	public AudioClip explosion;
 	public LayerMask collisionMask;
 	public LayerMask playerCollisionMask;
-	public float gravity;
 	public int verticalRayCount = 4;
 
 	float verticalRaySpacing;
-	
+	float gravity;
+
 	BoxCollider2D collider;
 	RaycastOrigins raycastOrigins;
 	[HideInInspector] public CollisionInfo collisions;
@@ -27,6 +27,7 @@ public class Bomb : MonoBehaviour {
 
 		dangerous = false;
 		grounded = false;
+		gravity = GameManager.instance.bombGravity;
 		explode = GetComponent<Animator> ();
 		collider = GetComponent<BoxCollider2D> ();
 		CalculateRaySpacing ();
